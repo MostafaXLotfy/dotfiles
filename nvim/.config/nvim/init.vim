@@ -33,9 +33,6 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 " tags
 Plug 'preservim/tagbar'
-" tmux
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'benmills/vimux'
 
 " auto completion and snippets
 Plug 'ycm-core/YouCompleteMe'
@@ -57,7 +54,7 @@ let NERDTreeAutoDeleteBuffer=1
 nnoremap <silent><leader>t :TagbarToggle
 
 """" ultisnippets
-let g:UltiSnipsExpandTrigger=";"
+let g:UltiSnipsExpandTrigger="<leader>;"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
@@ -68,10 +65,6 @@ let g:UltiSnipsEditSplit="vertical"
 colorscheme wal
 let g:airline_theme='dark'
 let g:airline_powerline_fonts = 1
-
-"""" vmux
-map <leader>v :VimuxPromptCommand <CR>
-
 
 """ basics
 " numbering on the side 
