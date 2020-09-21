@@ -9,7 +9,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 ~/personal/scripts/bar.sh
 # window composer for transparency
 # -D option to control the anmation
-picom -D 0 &
+pgre -x picom > /dev/null || picom -D 0 -m 1.0 --backend xrender &
 # workspaces names
 bspc monitor -d 1 2 3 4 5 6 7 8 9 
 # no borders
