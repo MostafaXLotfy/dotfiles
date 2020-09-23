@@ -51,7 +51,7 @@ nnoremap <silent><leader>n :NERDTreeToggle <CR>
 let NERDTreeAutoDeleteBuffer=1
 
 """" tagbar
-nnoremap <silent><leader>t :TagbarToggle
+nnoremap <silent><leader>t :TagbarToggle <CR>
 
 """" ultisnippets
 let g:UltiSnipsExpandTrigger="<leader>;"
