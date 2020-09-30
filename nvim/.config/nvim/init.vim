@@ -1,6 +1,6 @@
 let mapleader=","
 " downloding plugin manger if not downloaded
-"
+
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -38,13 +38,15 @@ Plug 'preservim/tagbar'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
+Plug 'skammer/vim-css-color'
 
 call plug#end()
 
 		""""" configuration """""
 
 """" nerdtree
-
 " toggle nerd tree 
 nnoremap <silent><leader>n :NERDTreeToggle <CR>
 " delete buffers when file removed
@@ -83,8 +85,9 @@ set shiftwidth=4
 set smartindent	
 set smarttab	
 set softtabstop=4	
-
 set clipboard=unnamed
+set formatoptions-=cro
+set ignorecase
 
 		    """" mappings """"
 
@@ -93,3 +96,4 @@ nnoremap <silent><C-l> :wincmd l <CR>
 nnoremap <silent><C-h> :wincmd h <CR>
 nnoremap <silent><C-k> :wincmd k <CR>
 nnoremap <silent><C-j> :wincmd j <CR>
+
