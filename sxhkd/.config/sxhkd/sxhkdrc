@@ -6,8 +6,12 @@
 super + Return
 	alacritty
 
+
 super + c
 	"$HOME/personal/scripts/go_to.sh" "$HOME/.fplaces"
+
+super + 0 
+	"$HOME/personal/scripts/layout.py" > /dev/null
 
 # make sxhkd reload its configuration files:
 super + Escape

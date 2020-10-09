@@ -18,15 +18,10 @@ Plug 'junegunn/vim-plug'
 Plug 'dylanaraps/wal'
 " line at the bottom
 Plug 'vim-airline/vim-airline'
-" syntax checker
-Plug 'vim-syntastic/syntastic'
 
 " git
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 
-" nerd tree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'preservim/nerdtree'
 
 " icons for vim
@@ -41,7 +36,9 @@ Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
 Plug 'skammer/vim-css-color'
-
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'preservim/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 		""""" configuration """""
@@ -53,7 +50,7 @@ nnoremap <silent><leader>n :NERDTreeToggle <CR>
 let NERDTreeAutoDeleteBuffer=1
 
 """" tagbar
-nnoremap <silent><leader>t :TagbarToggle <CR>
+nnoremap <silent><leader>t :TagbarToggle <CR> :wincmd l <CR> gg 
 
 """" ultisnippets
 let g:UltiSnipsExpandTrigger="<leader>;"
@@ -76,14 +73,10 @@ set showmatch
 set wildmenu 
 " fuzzy search for files
 set path+=**
-" highlight search results
-set hlsearch	
 
 " indentation
 set autoindent	
 set shiftwidth=4	
-set smartindent	
-set smarttab	
 set softtabstop=4	
 set clipboard=unnamed
 set formatoptions-=cro
@@ -97,3 +90,21 @@ nnoremap <silent><C-h> :wincmd h <CR>
 nnoremap <silent><C-k> :wincmd k <CR>
 nnoremap <silent><C-j> :wincmd j <CR>
 
+"""go lang"""
+autocmd FileType go map <leader>b <plug>(go-build)
+autocmd FileType go map <leader>r <plug>(go-run)
+autocmd FileType go map <silent><leader>g :GoDef <CR>
+autocmd FileType go map <leader>f :GoRename 
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+let g:go_auto_type_info = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+
+
+"""ycm"""
+nnoremap <silent><leader>g :YcmCompleter GoToDefinition <CR>
+let g:ycm_complete_in_comments = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
