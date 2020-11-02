@@ -1,6 +1,6 @@
 #! /bin/sh
 # autostart
-wal -i "$(ls -lh ~/.cache/wallpaper | sed 's/.*-> //')" &
+wal -i "$(ls -lh ~/.cache/wallpaper | sed 's/.*-> //')" 
 killall polybar ; polybar bar1 & 
 killall sxhkd ; sxhkd &
 killall dunst; dunst &

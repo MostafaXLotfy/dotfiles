@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	alacritty
+	st
 
 
 super + c
@@ -19,7 +19,7 @@ super + Escape
 
 # browser
 super + w
-	brave
+	$BROWSER
 # drun
 super + d
 	rofi -show drun

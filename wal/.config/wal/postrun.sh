@@ -15,3 +15,7 @@ echo -e "\e]4;258;${background_color}\a\c" > "${term}" 2>/dev/null
 echo -e "\e]4;259;${foreground_color}\a\c" > "${term}" 2>/dev/null
 done
 }
+
+fix_sequences <"${HOME}/.cache/wal/sequences"
+
+

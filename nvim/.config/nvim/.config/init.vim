@@ -8,75 +8,34 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 		""""" Plugins """""
 call plug#begin('~/.config/nvim/Plugged')
-" plugin manger
 Plug 'junegunn/vim-plug'
-" color scheme
 Plug 'dylanaraps/wal'
-" line at the bottom
 Plug 'vim-airline/vim-airline'
-
-" git
-Plug 'airblade/vim-gitgutter'
-
 Plug 'preservim/nerdtree'
-
-" icons for vim
-Plug 'ryanoasis/vim-devicons'
-" tags
-Plug 'preservim/tagbar'
-
-" auto completion and snippets
-" should install coc-clangd for c++ and c
-" install coc-pairs
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" for easy comments
 Plug 'preservim/nerdcommenter'
-" cmake
-Plug 'ilyachur/cmake4vim'
-" fuzzy search
-Plug 'ctrlpvim/ctrlp.vim'    
-
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf'
+Plug 'benmills/vimux'
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'tikhomirov/vim-glsl'
 call plug#end()
 
 		""""" configuration """""
-
-"""" nerdtree
-" toggle nerd tree 
-nnoremap <silent><leader>n :NERDTreeToggle <CR>
-nnoremap <silent><leader>v :NERDTreeFind <CR>
-" delete buffers when file removed
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
-"""" tagbar
-nnoremap <silent><leader>t :TagbarToggle <CR> :wincmd l <CR> gg 
-
-"""" ultisnippets
-let g:UltiSnipsExpandTrigger="<leader>;"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " color schemes and theme
 colorscheme wal
 let g:airline_theme='dark'
 let g:airline_powerline_fonts = 1
 
 """ basics
-" numbering on the side 
+set signcolumn=yes
 set number relativenumber	
 set showmatch	
-" suggesetion menu when typping a command
 set wildmenu 
-" fuzzy search for files
 set path+=**
-
-" indentation
 set autoindent	
 set shiftwidth=4	
 set softtabstop=4	
@@ -92,6 +51,14 @@ nnoremap <silent><C-h> :wincmd h <CR>
 nnoremap <silent><C-k> :wincmd k <CR>
 nnoremap <silent><C-j> :wincmd j <CR>
 
+nnoremap <silent><C-l>	:TmuxNavigateLeft<cr>
+nnoremap <silent><C-h>  :TmuxNavigateDown<cr>
+nnoremap <silent><C-k>  :TmuxNavigateUp<cr>
+nnoremap <silent><C-j>  :TmuxNavigateRight<cr>
+noremap <silent><space>f :FZF <CR>
+
+"noremap <silent><space>t :Tnew<CR><C-j>
+
 """go lang"""
 autocmd FileType go map <leader>b <plug>(go-build)
 autocmd FileType go map <leader>r <plug>(go-run)
@@ -106,10 +73,10 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 
 
-"""ycm"""
-nnoremap <silent><leader>g :YcmCompleter GoToDefinition <CR>
-let g:ycm_complete_in_comments = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+
+
+
+
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -260,5 +227,23 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
 
