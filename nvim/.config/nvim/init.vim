@@ -15,12 +15,11 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf'
-Plug 'benmills/vimux'
 Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'vim-syntastic/syntastic'
+Plug 'vimwiki/vimwiki'
 Plug 'tikhomirov/vim-glsl'
 call plug#end()
 
@@ -28,7 +27,6 @@ call plug#end()
 " color schemes and theme
 colorscheme wal
 let g:airline_theme='dark'
-let g:airline_powerline_fonts = 1
 
 """ basics
 set signcolumn=yes
@@ -42,6 +40,7 @@ set softtabstop=4
 set clipboard=unnamed
 set formatoptions-=cro
 set ignorecase
+syntax on
 
 		    """" mappings """"
 
@@ -247,3 +246,4 @@ nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
 
+autocmd FileType cpp nnoremap<silent><leader>s :CocCommand clangd.switchSourceHeader<CR>
