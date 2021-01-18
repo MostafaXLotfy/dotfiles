@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/mnt/windows/college/semester5/os/project/xv6-public'
+let g:netrw_dirhist_5='/mnt/windows/college/semester5/os/project/minix'
+let g:netrw_dirhist_4='/mnt/windows/college/semester5/eda/vhdl/sheet3/q3.vhdl'
+let g:netrw_dirhist_3='/home/mostafa/foo'
+let g:netrw_dirhist_2='/mnt/windows/college/semester5/data-structure/codes/LQueue'
+let g:netrw_dirhist_1='/mnt/windows/college/semester5/eda/vhdl/sheet3'

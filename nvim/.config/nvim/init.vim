@@ -3,30 +3,32 @@ let mapleader=","
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 		""""" Plugins """""
 call plug#begin('~/.config/nvim/Plugged')
 Plug 'junegunn/vim-plug'
-Plug 'dylanaraps/wal'
 Plug 'vim-airline/vim-airline'
-Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'preservim/nerdcommenter'
-Plug 'junegunn/fzf'
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'vim-syntastic/syntastic'
+Plug 'embark-theme/vim', { 'as': 'embark' }
+Plug 'sainnhe/gruvbox-material'
+Plug 'dracula/vim'
+Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
 Plug 'vimwiki/vimwiki'
 Plug 'tikhomirov/vim-glsl'
+Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
 
+source ~/.config/nvim/cpp.vim
+source ~/.config/nvim/suckless.vim
+
 		""""" configuration """""
-" color schemes and theme
-colorscheme wal
-let g:airline_theme='dark'
+set termguicolors
+colorscheme dracula
 
 """ basics
 set signcolumn=yes
@@ -56,7 +58,6 @@ nnoremap <silent><C-k>  :TmuxNavigateUp<cr>
 nnoremap <silent><C-j>  :TmuxNavigateRight<cr>
 noremap <silent><space>f :FZF <CR>
 
-"noremap <silent><space>t :Tnew<CR><C-j>
 
 """go lang"""
 autocmd FileType go map <leader>b <plug>(go-build)
@@ -70,11 +71,6 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
-
-
-
-
-
 
 
 " TextEdit might fail if hidden is not set.
@@ -246,4 +242,25 @@ nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
 
-autocmd FileType cpp nnoremap<silent><leader>s :CocCommand clangd.switchSourceHeader<CR>
+
+function! EditVimConfigs()
+   edit ~/.config/nvim/init.vim
+endfunction
+
+command Config call EditVimConfigs()
+
+ let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']   
+
+" open new split panes to right and below
+set splitright
+set splitbelow
+" turn terminal to normal mode with escape
+tnoremap <Esc> <C-\><C-n>
+" start terminal in insert mode
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+" open terminal on ctrl+n
+function! OpenTerminal()
+ split term://fish
+ resize 10
+endfunction
+nnoremap <c-n> :call OpenTerminal()<CR>
